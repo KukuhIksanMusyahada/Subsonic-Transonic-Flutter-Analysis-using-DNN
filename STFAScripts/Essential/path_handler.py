@@ -1,7 +1,7 @@
 import os
 
 
-from 
+from Essential import global_params as gp
 
 
 def get_this_dir():
@@ -9,7 +9,7 @@ def get_this_dir():
 
 
 def get_data_source():
-    return os.path.join(get_this_dir(), 'Data_Source')
+    return os.path.join(get_this_dir(), os.pardir, 'Data_Source')
 
 
 def get_raw_data():
@@ -34,10 +34,10 @@ def get_models_data():
 
 
 def InitDataDirectories():
-    important_dir = None
+    important_dir = gp.DATA_DIRECTORIES
 
     for dir in important_dir:
-        full_path = os.path.join (GetThisDir(), os.pardir, os.pardir, dir)
+        full_path = os.path.join (get_this_dir(), os.pardir, dir)
         full_path = os.path.abspath (full_path)
 
         if not os.path.exists(full_path):
