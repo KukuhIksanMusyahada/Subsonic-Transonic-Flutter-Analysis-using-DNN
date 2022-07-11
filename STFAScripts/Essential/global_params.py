@@ -12,4 +12,9 @@ DATA_DIRECTORIES = [
         "Data_Source/Raw",
         "Data_Source/Results",
         "Data_Source/Processed",
+        "Data_Source/Processed/Transonic_Data",
+        "Data_Source/Processed/Flutter_Data",
+        "Data_Source/Processed/Non_Flutter_Data",
+        "Data_Source/Processed/Flutter_Classification_Data"
+        
     ]
