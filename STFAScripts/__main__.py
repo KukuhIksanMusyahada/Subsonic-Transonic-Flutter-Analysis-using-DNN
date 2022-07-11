@@ -7,7 +7,7 @@ def runner():
     # Init Directories
     ph.InitDataDirectories()
     # Get The Data
-    
+    gd.scan()
     # Process the data
 
 
