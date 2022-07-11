@@ -5,6 +5,9 @@ COLUMNS1 = ['CD', 'CL', 'plunge(airfoil)', 'pitch(airfoil)']
 COLUMNS2 = ['CD', 'CL', 'plunge_airfoil','pitch_airfoil']
 NROWS = 110
 
+# Training
+TRAIN_RATIO = 0.9
+
 
 # Directories
 DATA_DIRECTORIES = [
