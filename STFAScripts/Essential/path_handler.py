@@ -19,6 +19,18 @@ def get_raw_data():
 def get_processed_data():
     return os.path.join(get_data_source(), 'Processed')
 
+def get_transonic_data():
+    return os.path.join(get_processed_data(),'Transonic_Data')
+
+def get_flutter_data():
+    return os.path.join(get_processed_data(),'Flutter_Data')
+
+def get_non_flutter_data():
+    return os.path.join(get_processed_data(),'Non_Flutter_Data')
+
+def get_flutter_class_data():
+    return os.path.join(get_processed_data(),'Flutter_Classification_Data')
+
 
 def get_result_data():
     return os.path.join(get_data_source(), 'Result')
