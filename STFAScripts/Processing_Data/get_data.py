@@ -1,4 +1,6 @@
+import os
 import re
+import numpy as np
 import pandas as pd
 
 from Essential import path_handler as ph
@@ -11,11 +13,18 @@ def extract_mach_and_vf(file: str):
 
     return float(result.group(1)), float(result.group(2))
 
-def get_df(path):
-    try:
-        df = pd.read_csv(path, usecols=gp.COLUMNS1)
-    except ValueError:
-        df = pd.read_csv(path, usecols=gp.COLUMNS2)
+def get_df(path, flutter_test=False, usecols1= gp.COLUMNS1, usecols2=gp.COLUMNS2):
+    if flutter_test == False:
+        try:
+            df = pd.read_csv(path, usecols=gp.COLUMNS1, engine='python')
+        except ValueError:
+            df = pd.read_csv(path, usecols=gp.COLUMNS2,engine='python')
+    else:
+        col = [['plunge(airfoil)'], ['plunge_airfoil']]
+        try:
+            df = pd.read_csv(path, usecols= col[0],engine='python').to_numpy()
+        except ValueError:
+            df = pd.read_csv(path, usecols= col[1],engine='python').to_numpy()
 
     return df
 
@@ -57,8 +66,43 @@ def divergence_test(array, index, wait =3):
     return divergen
 
 
-def split_cases(path= ph.get_raw_data()):
-    mach= []
-    vf = []
-    divergence = []
-    
+def split_cases(file,path):
+    mach, vf = extract_mach_and_vf(file)
+    df = get_df(path, flutter_test=False)
+    arr = get_df(path, flutter_test= True)
+    grad= gradien(arr)
+    turn_point = find_turn_point(grad)
+    divergen = divergence_test(arr, turn_point)
+    if divergen== 0:
+        df.to_csv(os.path.join(ph.get_non_flutter_data(), file))
+    elif divergen ==1:
+        df.to_csv(os.path.join(ph.get_flutter_data(), file))
+    return mach, vf, divergen
+        
+
+
+
+def scan(path= ph.get_raw_data()):
+    Mach= []
+    Vf = []
+    Flutter = []
+    for dir in os.listdir(path):
+        dir_path = os.path.join(path, dir)
+        if dir == 'M_0.9':
+            for file in os.listdir(dir_path):
+                if file.endswith('.csv'):
+                    file_path = os.path.join(dir_path, file)
+                    df = get_df(file_path, flutter_test=False)
+                    df.to_csv(os.path.join(ph.get_transonic_data(), file))
+        else:
+            for file in os.listdir(dir_path):
+                if file.endswith('.csv'):
+                    file_path = os.path.join(dir_path, file)
+                    mach,vf, divergen = split_cases(file, file_path)
+                    Mach.append(mach)
+                    Vf.append(vf)
+                    Flutter.append(divergen)
+    data = np.array([Mach, Vf, Flutter]).T
+    df_clf = pd.DataFrame(data, columns=['Mach', 'Vf', 'Flutter'])
+    df_clf.to_csv(os.path.join(ph.get_flutter_class_data(),'Flutter_Classification_Data.csv'))
+                
