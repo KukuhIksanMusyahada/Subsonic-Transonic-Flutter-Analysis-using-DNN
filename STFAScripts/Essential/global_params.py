@@ -3,6 +3,7 @@
 # Columns
 COLUMNS1 = ['CD', 'CL', 'plunge(airfoil)', 'pitch(airfoil)']
 COLUMNS2 = ['CD', 'CL', 'plunge_airfoil','pitch_airfoil']
+NROWS = 110
 
 
 # Directories
