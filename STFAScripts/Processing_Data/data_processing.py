@@ -35,6 +35,7 @@ def process_data_classification(file='Flutter_Classification_Data.csv',path= ph.
 
 def process_data_flutter(path = ph.get_flutter_data(),train_ratio= gp.TRAIN_RATIO):
     input, label = create_training_array(path)
+    label = label * 10000
     X_train, X_val, y_train, y_val = train_test_split(input,label, train_size= train_ratio, shuffle= False)
     return X_train, X_val, y_train, y_val
 

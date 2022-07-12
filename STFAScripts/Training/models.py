@@ -5,13 +5,16 @@ import pickle
 import tensorflow as tf
 
 from keras.models import Sequential
-from keras.layers import Dense, Reshape
+from keras.layers import Dense, Reshape, Dropout
 
 from Essential import path_handler as ph
 from Essential import global_params as gp
 
 
-def model_classification(X_train, X_val, y_train, y_val, max_epoch= 300):
+def my_leaky_relu(x):
+    return tf.nn.leaky_relu(x, alpha=0.01)
+
+def model_classification(x_train, x_val, y_train, y_val, max_epoch= 300):
     model = Sequential([
         Dense(300, activation='relu', input_dim = 2),
         Dense(100, activation='relu'),
@@ -20,26 +23,30 @@ def model_classification(X_train, X_val, y_train, y_val, max_epoch= 300):
     ])
     model.compile(loss='binary_crossentropy', optimizer='adam')
 
-    history = model.fit(X_train,y_train, epochs= max_epoch, 
-                        validation_data=(X_val, y_val),verbose=0)
+    history = model.fit(x_train, y_train, epochs= max_epoch,
+                        validation_data=(x_val, y_val), verbose=0)
 
     return model, history
 
-def model_flutter(X_train, X_val, y_train, y_val, max_epoch= 300, n_features= 4):
+
+def model_flutter(x_train, x_val, y_train, y_val, max_epoch= 30, n_features= 4):
     model = Sequential([
-        Dense(500, activation='relu', input_shape= (1,2)),
-        Dense(500, activation='relu'),
-        Dense(500, activation='relu'),
-        Dense(n_features*gp.NROWS),
-        Reshape((gp.NROWS,n_features))
+        Dense(500, activation=my_leaky_relu, input_shape= (1,2)),
+        Dense(500, activation=my_leaky_relu),
+        Dropout(.5),
+        Dense(500, activation=my_leaky_relu),
+        Dropout(.3),
+        Dense(n_features*gp.NROWS, kernel_initializer=tf.initializers.zeros()),
+        Reshape([gp.NROWS,n_features])
 
     ])
-    model.compile(loss='mse', optimizer='adam')
+    model.compile(loss="mean_squared_error" , optimizer=tf.keras.optimizers.RMSprop(learning_rate= 1e-7))
 
-    history = model.fit(X_train,y_train, epochs= max_epoch, 
-                        validation_data=(X_val, y_val),verbose=1)
+    history = model.fit(x_train, y_train, epochs= max_epoch,
+                        validation_data=(x_val, y_val), verbose=1)
 
     return model, history
+
 
 def model_non_flutter(X_train, X_val, y_train, y_val, max_epoch= 300, n_features= 4):
     model = Sequential([
@@ -56,6 +63,7 @@ def model_non_flutter(X_train, X_val, y_train, y_val, max_epoch= 300, n_features
                         validation_data=(X_val, y_val),verbose=1)
 
     return model, history
+
 
 def model_transonic(X_train, X_val, y_train, y_val, max_epoch= 300, n_features= 4):
     model = Sequential([
