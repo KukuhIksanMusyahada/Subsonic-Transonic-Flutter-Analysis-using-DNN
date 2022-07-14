@@ -29,18 +29,16 @@ def model_classification(x_train, x_val, y_train, y_val, max_epoch= 300):
     return model, history
 
 
-def model_flutter(x_train, x_val, y_train, y_val, max_epoch= 30, n_features= 4):
+def model_flutter(x_train, x_val, y_train, y_val,max_row, max_epoch= 300, n_features= 4):
     model = Sequential([
-        Dense(500, activation=my_leaky_relu, input_shape= (1,2)),
-        Dense(500, activation=my_leaky_relu),
-        Dropout(.5),
-        Dense(500, activation=my_leaky_relu),
-        Dropout(.3),
-        Dense(n_features*gp.NROWS, kernel_initializer=tf.initializers.zeros()),
-        Reshape([gp.NROWS,n_features])
+        Dense(500, activation='relu', input_dim= 2),
+        Dense(500, activation='relu'),
+        Dense(500, activation='relu'),
+        Dense(n_features*max_row),
+        Reshape([max_row,n_features])
 
     ])
-    model.compile(loss="mean_squared_error" , optimizer=tf.keras.optimizers.RMSprop(learning_rate= 1e-7))
+    model.compile(loss=tf.keras.losses.huber , optimizer='adam')
 
     history = model.fit(x_train, y_train, epochs= max_epoch,
                         validation_data=(x_val, y_val), verbose=1)
