@@ -3,5 +3,5 @@ import numpy as np
 import tensorflow as tf
 
 
-def trainer():
+def classification_trainer():
     pass
