@@ -56,6 +56,10 @@ def get_models_transonic():
     return os.path.join(get_models_data(), 'Model_Transonic')
 
 
+def get_models_master():
+    return os.path.join(get_models_data(), 'Model_Master')
+
+
 
 
 
