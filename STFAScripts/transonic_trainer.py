@@ -11,7 +11,7 @@ def transonic_trainer(x_train,x_val,y_train,y_val, max_row):
     time_now = now.strftime('%Y-%m-%d-%H:%M:%S')
     print(f'TRAINING MODELS TRANSONIC START AT {time_now}')
     model, history = model_transonic(x_train,x_val,y_train,y_val, max_row)
-    savemodel(model, history,type_case=1 , model_path=ph.get_models_non_flutter())
+    savemodel(model, history,type_case=3 , model_path=ph.get_models_transonic())
     end = datetime.datetime.now()
     time_end = end.strftime('%Y-%m-%d-%H:%M:%S')
     print(f'TRAINING MODELS TRANSONIC DONE AT {time_end}')

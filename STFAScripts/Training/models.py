@@ -11,6 +11,11 @@ from Essential import path_handler as ph
 from Essential import global_params as gp
 
 
+
+def set_low_tf_verbose():
+    tf.get_logger().setLevel('ERROR')
+
+
 def my_leaky_relu(x):
     return tf.nn.leaky_relu(x, alpha=0.01)
 
