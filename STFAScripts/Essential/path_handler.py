@@ -40,6 +40,22 @@ def get_models_data():
     return os.path.join(get_data_source(), 'Models')
 
 
+def get_models_classification():
+    return os.path.join(get_models_data(), 'Model_Classification')
+
+
+def get_models_non_flutter():
+    return os.path.join(get_models_data(), 'Model_Non_Flutter')
+
+
+def get_models_flutter():
+    return os.path.join(get_models_data(), 'Model_Flutter')
+
+
+def get_models_transonic():
+    return os.path.join(get_models_data(), 'Model_Transonic')
+
+
 
 
 
