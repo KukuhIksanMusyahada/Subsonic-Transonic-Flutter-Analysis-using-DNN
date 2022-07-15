@@ -11,7 +11,7 @@ def nf_trainer(x_train,x_val,y_train,y_val, max_row):
     time_now = now.strftime('%Y-%m-%d-%H:%M:%S')
     print(f'TRAINING MODELS NON FLUTTER START AT {time_now}')
     model, history = model_non_flutter(x_train,x_val,y_train,y_val, max_row)
-    savemodel(model, history,type_case=1 , model_path=ph.get_models_non_flutter())
+    savemodel(model, history,type_case=2 , model_path=ph.get_models_non_flutter())
     end = datetime.datetime.now()
     time_end = end.strftime('%Y-%m-%d-%H:%M:%S')
     print(f'TRAINING MODELS NON FLUTTER DONE AT {time_end}')
