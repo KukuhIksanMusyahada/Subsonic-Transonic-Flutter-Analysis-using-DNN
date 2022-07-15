@@ -11,13 +11,11 @@ def classification_trainer(x_train,x_val,y_train,y_val):
     time_now = now.strftime('%Y-%m-%d-%H:%M:%S')
     print(f'TRAINING CLASSIFICATION FLUTTER START AT {time_now}')
     model, history = model_classification(x_train,x_val,y_train,y_val)
-    savemodel(model, history,type_case=4 , model_path=ph.get_models_classification())
+    savemodel(model, history,type_case=0 , model_path=ph.get_models_classification())
     end = datetime.datetime.now()
     time_end = end.strftime('%Y-%m-%d-%H:%M:%S')
     print(f'TRAINING CLASSIFICATION DONE AT {time_end}')
     delta_time = end-now
     print(f'TIME NEEDED TO TRAIN CLASSIFICATION MODEL IS {delta_time}')
 
-    return model, history
-
-    
+    return model, history, delta_time
