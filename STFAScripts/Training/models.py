@@ -41,7 +41,7 @@ def model_flutter(x_train, x_val, y_train, y_val,max_row, max_epoch= 300, n_feat
     model.compile(loss=tf.keras.losses.huber , optimizer='adam')
 
     history = model.fit(x_train, y_train, epochs= max_epoch,
-                        validation_data=(x_val, y_val), verbose=1)
+                        validation_data=(x_val, y_val), verbose=0)
 
     return model, history
 
@@ -58,7 +58,7 @@ def model_non_flutter(x_train, x_val, y_train, y_val,max_row, max_epoch= 300, n_
     model.compile(loss=tf.keras.losses.huber , optimizer='adam')
 
     history = model.fit(x_train, y_train, epochs= max_epoch,
-                        validation_data=(x_val, y_val), verbose=1)
+                        validation_data=(x_val, y_val), verbose=0)
 
     return model, history
 
@@ -75,7 +75,7 @@ def model_transonic(x_train, x_val, y_train, y_val,max_row, max_epoch= 300, n_fe
     model.compile(loss=tf.keras.losses.huber , optimizer='adam')
 
     history = model.fit(x_train, y_train, epochs= max_epoch,
-                        validation_data=(x_val, y_val), verbose=1)
+                        validation_data=(x_val, y_val), verbose=0)
 
     return model, history
 
