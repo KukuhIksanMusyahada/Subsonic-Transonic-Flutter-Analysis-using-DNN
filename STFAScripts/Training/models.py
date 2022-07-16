@@ -87,18 +87,14 @@ def model_transonic(x_train, x_val, y_train, y_val,max_row, max_epoch= 300, n_fe
 
 def savemodel(model, history,type_case=4 , model_path: str=ph.get_models_master()):
     """Save both model and history"""
-
-    case = ["ModelFlutterClassification", "ModelFlutterPrediction",
-            "ModelNonFlutterPrediction", "ModelTransonicPrediction",
-            "MasterModel"]
     
     if model_path != None:
         nomor_model = str(len(os.listdir(model_path))+1)
-        folder_name = case[type_case] + nomor_model
+        folder_name = gp.CASE[type_case] + nomor_model
         model_directory = os.path.join (model_path, folder_name)
     else:
         nomor_model = str(len(os.listdir(ph.get_models_master()))+1)
-        folder_name = case[type_case] + nomor_model
+        folder_name = gp.CASE[type_case] + nomor_model
         model_directory = os.path.join (ph.get_models_master(), folder_name)
     os.makedirs(model_directory)
     history_file = os.path.join(model_directory, 'history.pkl')
@@ -112,12 +108,10 @@ def savemodel(model, history,type_case=4 , model_path: str=ph.get_models_master(
     print ("Model history saved to {}".format(history_file))
 
 
-def loadmodel(path, type_case, num_model):
+def load_model(path, type_case, num_model):
     """Load Model and optionally it's history as well"""
-    case = ["ModelFlutterClassification", "ModelFlutterPrediction",
-            "ModelNonFlutterPrediction", "ModelTransonicPrediction",
-            "MasterModel"]
-    folder_name = case[type_case] + str(num_model)
+
+    folder_name = gp.CASE[type_case] + str(num_model)
 
     path_to_model = os.path.join(path,folder_name)
     history_file = os.path.join(path_to_model, 'history.pkl')

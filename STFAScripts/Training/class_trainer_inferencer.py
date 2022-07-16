@@ -3,7 +3,7 @@ import numpy as np
 import tensorflow as tf
 
 from Essential import path_handler as ph
-from Training.models import model_classification, savemodel
+from Training.models import *
 
 
 def classification_trainer(x_train,x_val,y_train,y_val):
@@ -22,5 +22,11 @@ def classification_trainer(x_train,x_val,y_train,y_val):
 
 
 
-def classification_inferencer(mach, vf, num_model,type_case=0):
-    pass
+def classification_inferencer(model, mach, vf, num_model=1,type_case=0):
+    model, history = load_model(ph.get_models_classification(),num_model, type_case)
+    # Plot and save Histories`plot
+
+    #Predict 
+    prediction = predict_class(model, mach, vf)
+
+    return prediction

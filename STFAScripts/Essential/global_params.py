@@ -1,5 +1,4 @@
 from Essential import path_handler as ph
-from Training.trainer_inferencer import *
 
 # Columns
 COLUMNS1 = ['CD', 'CL', 'plunge(airfoil)', 'pitch(airfoil)']
@@ -10,7 +9,10 @@ COLUMNS2 = ['CD', 'CL', 'plunge_airfoil','pitch_airfoil']
 TRAIN_RATIO = 0.9
 CASE = ["ModelFlutterClassification", "ModelFlutterPrediction",
             "ModelNonFlutterPrediction", "ModelTransonicPrediction",
-            "MasterModel"]
+           ]
+
+PREDICTION_DICT = {'Classification': None, 'Flutter': None,
+                    'Non Flutter': None, 'Transonic': None}
 
 
 
