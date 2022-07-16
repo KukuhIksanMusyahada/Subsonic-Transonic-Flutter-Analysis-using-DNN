@@ -22,8 +22,8 @@ def classification_trainer(x_train,x_val,y_train,y_val):
 
 
 
-def classification_inferencer(model, mach, vf, num_model=1,type_case=0):
-    model, history = load_model(ph.get_models_classification(),num_model, type_case)
+def classification_inferencer(mach, vf,type_case=0, num_model=1):
+    model, history = load_model(ph.get_models_classification(), type_case=type_case,num_model=num_model)
     # Plot and save Histories`plot
 
     #Predict 

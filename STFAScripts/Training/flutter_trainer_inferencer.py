@@ -20,8 +20,8 @@ def f_trainer(x_train,x_val,y_train,y_val, max_row):
     return model, history, delta_time
 
 
-def f_inferencer(mach, vf, num_model,path=ph.get_models_flutter(), type_case=3):
-    model, history = load_model(path, num_model, type_case)
+def f_inferencer(mach, vf, num_model=1,path=ph.get_models_flutter(), type_case=1):
+    model, history = load_model(path, type_case, num_model)
     # Plot and save Histories`plot
 
     #Predict 

@@ -22,8 +22,8 @@ def transonic_trainer(x_train,x_val,y_train,y_val, max_row):
 
 
 
-def transonic_inferencer(mach, vf, num_model,path=ph.get_models_transonic(), type_case=3):
-    model, history = load_model(path, num_model, type_case)
+def transonic_inferencer(mach, vf, num_model=1,path=ph.get_models_transonic(), type_case=3):
+    model, history = load_model(path, type_case, num_model)
     # Plot and save Histories`plot
 
     #Predict 
