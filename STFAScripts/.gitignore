@@ -130,6 +130,4 @@ dmypy.json
 
 
 # Folder
-Data_Source/Processed/*
-Data_Source/Raw/*
-Data_Source/Result/*
+Data_Source/*
