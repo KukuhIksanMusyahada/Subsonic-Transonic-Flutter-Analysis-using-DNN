@@ -19,3 +19,8 @@ def nf_trainer(x_train,x_val,y_train,y_val, max_row):
     print(f'TIME NEEDED TO TRAIN NON FLUTTER MODEL IS {delta_time}')
 
     return model, history, delta_time
+
+
+
+def nf_inferencer(mach, vf):
+    pass

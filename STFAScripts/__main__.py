@@ -3,10 +3,10 @@ from Essential import path_handler as ph
 from Processing_Data import get_data as gd
 from Processing_Data import data_processing as dp
 from Training.models import set_low_tf_verbose
-from class_trainer import classification_trainer
-from flutter_trainer import f_trainer
-from non_flutter_trainer import nf_trainer
-from transonic_trainer import transonic_trainer
+from class_trainer_inferencer import classification_trainer
+from flutter_trainer_inferencer import f_trainer
+from non_flutter_trainer_inferencer import nf_trainer
+from transonic_trainer_inferencer import transonic_trainer
 
 def runner():
     set_low_tf_verbose()

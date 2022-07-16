@@ -19,3 +19,8 @@ def transonic_trainer(x_train,x_val,y_train,y_val, max_row):
     print(f'TIME NEEDED TO TRAIN TRANSONIC MODEL IS {delta_time}')
 
     return model, history, delta_time
+
+
+
+def transonic_inferencer(mach, vf):
+    pass

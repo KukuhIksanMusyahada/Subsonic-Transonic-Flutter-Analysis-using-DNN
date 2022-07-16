@@ -19,3 +19,7 @@ def f_trainer(x_train,x_val,y_train,y_val, max_row):
     print(f'TIME NEEDED TO TRAIN FLUTTER MODEL IS {delta_time}')
 
     return model, history, delta_time
+
+
+def f_inferencer(mach, vf):
+    pass
