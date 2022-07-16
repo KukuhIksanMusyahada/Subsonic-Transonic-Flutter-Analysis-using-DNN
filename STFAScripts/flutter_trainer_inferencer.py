@@ -21,5 +21,5 @@ def f_trainer(x_train,x_val,y_train,y_val, max_row):
     return model, history, delta_time
 
 
-def f_inferencer(mach, vf):
+def f_inferencer(mach, vf, num_model,type_case=1):
     pass

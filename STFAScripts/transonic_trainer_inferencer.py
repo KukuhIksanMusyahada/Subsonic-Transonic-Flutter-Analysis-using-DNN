@@ -22,5 +22,5 @@ def transonic_trainer(x_train,x_val,y_train,y_val, max_row):
 
 
 
-def transonic_inferencer(mach, vf):
+def transonic_inferencer(mach, vf, num_model,type_case=3):
     pass

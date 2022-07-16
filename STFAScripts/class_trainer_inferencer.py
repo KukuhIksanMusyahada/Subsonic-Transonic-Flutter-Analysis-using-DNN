@@ -22,5 +22,5 @@ def classification_trainer(x_train,x_val,y_train,y_val):
 
 
 
-def classification_inferencer(mach, vf):
+def classification_inferencer(mach, vf, num_model,type_case=0):
     pass
