@@ -112,8 +112,14 @@ def savemodel(model, history,type_case=4 , model_path: str=ph.get_models_master(
     print ("Model history saved to {}".format(history_file))
 
 
-def loadmodel(path_to_model):
+def loadmodel(path, type_case, num_model):
     """Load Model and optionally it's history as well"""
+    case = ["ModelFlutterClassification", "ModelFlutterPrediction",
+            "ModelNonFlutterPrediction", "ModelTransonicPrediction",
+            "MasterModel"]
+    folder_name = case[type_case] + str(num_model)
+
+    path_to_model = os.path.join(path,folder_name)
     history_file = os.path.join(path_to_model, 'history.pkl')
     model = tf.keras.models.load_model(path_to_model)
     # model = tf.saved_model.load(path_to_model)
@@ -126,9 +132,17 @@ def loadmodel(path_to_model):
     return model, history
 
 
-def predict(model, mach= None, vf=None):
+def predict_class(model, mach, vf):
     input = [[mach, vf]]
     pred = model.predict(input)
     pred = np.round(pred[0][0])
+
+    return pred
+
+
+def predict_non_class(model, mach, vf):
+    input = [[mach, vf]]
+    pred = model.predict(input)
+    pred = np.squeeze(pred)
 
     return pred
