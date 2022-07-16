@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 from Essential import global_params as gp
@@ -50,6 +51,36 @@ def runner():
     print(f'TOTAL TIME FOR TRAINING = {total_time}')
 
     # Inference 
+    class_pred = classification_inferencer(mach, vf)
+    if class_pred == 0:
+        output_str='Airfoil will not experience flutter'
+    else:
+        output_str='Airfoil will experience flutter'
+    if mach < 0.9:
+        ## Class Prediction
+        ## Feature Prediction
+        if class_pred == 0:
+            feature_pred = nf_inferencer(mach, vf)
+        else:
+            feature_pred = f_inferencer(mach, vf)
+    else:
+        feature_pred = transonic_inferencer(mach, vf)
+    print(f'Predicting done with the result /n')
+    print(output_str)
+    print()
+    print(f'The properties (CL, CD, Plunge, Pitch) is at {feature_pred.shape}')
+    test = pd.read_csv(os.path.join(ph.get_transonic_data(),'M_0.9_VF_1.0.csv'), nrows=90)
+    test['CL'].plot()
+    test['CD'].plot()
+    test['plunge_airfoil'].plot()
+    test['pitch_airfoil'].plot()
+    plt.plot(feature_pred[:,0], label='CL_Pred')
+    plt.plot(feature_pred[:,1], label='CD_Pred')
+    plt.plot(feature_pred[:,2], label='Plunge_Pred')
+    plt.plot(feature_pred[:,3], label='Pitch_Pred')
+    plt.legend()
+    plt.show()
+
     
 if __name__=='__main__':
     runner()
