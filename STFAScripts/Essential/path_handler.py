@@ -33,7 +33,18 @@ def get_flutter_class_data():
 
 
 def get_result_data():
-    return os.path.join(get_data_source(), 'Result')
+    return os.path.join(get_data_source(), 'Results')
+
+def get_models_result():
+    return os.path.join(get_result_data(),'Models_Result')
+
+
+def get_models_history():
+    return os.path.join(get_models_result(),'Models_History')
+
+
+def get_models_prediction():
+    return os.path.join(get_models_result(),'Models_Prediction')
 
 
 def get_models_data():
