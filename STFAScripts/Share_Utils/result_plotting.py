@@ -13,7 +13,7 @@ def history_plot(history, mach, vf, type_case, path=ph.get_models_history()):
     now = datetime.datetime.now()
     time_now = now.strftime('%Y-%m-%d-%H-%M-%S')
     path=ph.get_models_history()
-    folder_name = gp.CASE[type_case] +str(mach)+ str(vf)+time_now
+    folder_name = gp.CASE[type_case] +'-'+str(mach)+'-'+ str(vf)+'-'+time_now
     folder_path = os.path.join(path, folder_name)
     os.makedirs(folder_path, exist_ok=True)
     plt.ion()
