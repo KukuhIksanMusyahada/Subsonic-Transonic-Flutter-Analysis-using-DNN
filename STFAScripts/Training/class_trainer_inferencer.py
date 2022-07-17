@@ -4,7 +4,7 @@ import tensorflow as tf
 
 from Essential import path_handler as ph
 from Training.models import *
-from Share_Utils.result_plotting import history_plot
+from Share_Utils.result_plotting import *
 
 
 def classification_trainer(x_train,x_val,y_train,y_val):
@@ -26,7 +26,7 @@ def classification_trainer(x_train,x_val,y_train,y_val):
 def classification_inferencer(mach, vf,type_case=0, num_model=1):
     model, history = load_model(ph.get_models_classification(), type_case=type_case,num_model=num_model)
     # Plot and save Histories`plot
-    history_plot(history,type_case=type_case, path=ph.get_models_history())
+    history_plot(history,mach, vf,type_case=type_case, path=ph.get_models_history())
     #Predict 
     prediction = predict_class(model, mach, vf)
 

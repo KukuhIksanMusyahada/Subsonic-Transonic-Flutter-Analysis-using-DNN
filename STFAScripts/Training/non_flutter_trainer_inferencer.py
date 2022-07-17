@@ -4,6 +4,7 @@ import tensorflow as tf
 
 from Essential import path_handler as ph
 from Training.models import *
+from Share_Utils.result_plotting import *
 
 
 def nf_trainer(x_train,x_val,y_train,y_val, max_row):
@@ -25,9 +26,11 @@ def nf_trainer(x_train,x_val,y_train,y_val, max_row):
 def nf_inferencer(mach, vf, num_model=1,path=ph.get_models_non_flutter(), type_case=2):
     model, history = load_model(path, type_case, num_model)
     # Plot and save Histories`plot
-    history_plot(history,type_case=type_case, path=ph.get_models_history())
+    history_plot(history,mach, vf, type_case=type_case, path=ph.get_models_history())
 
     #Predict 
-    prediction = predict_non_class(model, mach, vf)
+    pred = predict_non_class(model, mach, vf)
+    prediction_to_csv(pred,mach, vf, type_case=type_case)
+    prediction_plot(pred,mach, vf, type_case=type_case)
 
-    return prediction
+    return pred
