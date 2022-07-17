@@ -25,6 +25,7 @@ def nf_trainer(x_train,x_val,y_train,y_val, max_row):
 def nf_inferencer(mach, vf, num_model=1,path=ph.get_models_non_flutter(), type_case=2):
     model, history = load_model(path, type_case, num_model)
     # Plot and save Histories`plot
+    history_plot(history,type_case=type_case, path=ph.get_models_history())
 
     #Predict 
     prediction = predict_non_class(model, mach, vf)
