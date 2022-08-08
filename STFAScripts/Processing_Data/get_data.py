@@ -1,4 +1,3 @@
-from ctypes import sizeof
 import os
 import re
 import numpy as np
